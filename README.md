@@ -83,7 +83,8 @@ bash build.sh
 ### Subjects
 --- --- ---
 Statistics of datasets and of target models.
-<img src="./figs/subjects.png" alt="drawing" width="1000">
+
+<img src="./figs/subjects.png" alt="drawing" width="800">
 
 --- --- ---
 We used 3 state-of-the-art pre-trained models (i.e., CodeBERT, GraphCodeBERT, and CodeT5) and 6 code-based datasets (i.e., Authorship Attribution, Defect Prediction, Functionality Classification C104, Functionality Classification C++1000, Functionality Classification Python800, and Functionality Classification Java250) in our study. These models and datasets have been widely used in many existing studies on evaluating the robustness of deep code models. By fine-tuning each pre-trained model on each dataset, we obtained 18 deep code models as the subjects in total in our study.
@@ -134,14 +135,14 @@ We refer to the README.md files under each dataset folder to prepare the dataset
 
 
 ####  (4) Influence of hyper-parameter θ in terms of CSR (↑)/MCR (↓)/the average time spend on denoising an input (↓).
-<img src="./figs/theta.png" alt="drawing" width="1000">
+<img src="./figs/theta.png" alt="drawing" width="800">
 
 --- --- ---
 
 
 
 ####  (5) Influence of hyper-parameter N in terms of CSR (↑)/MCR (↓)/the average time spend on denoising an input (↓).
-<img src="./figs/n.png" alt="drawing" width="1000">
+<img src="./figs/n.png" alt="drawing" width="800">
 
 --- --- ---
 
