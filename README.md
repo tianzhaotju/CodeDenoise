@@ -109,11 +109,12 @@ CUDA_VISIBLE_DEVICES=0 python denoise.py --model_name=codebert --theta=1 --N=1;
 
 
 ### Running Experiments
+--- --- ---
 We refer to the README.md files under each dataset folder to prepare the dataset and denoise inputs on different tasks. 
 
 
 ### Experimental Results
-
+--- --- ---
 ####  (1) Effectiveness comparison in terms of CSR (↑)/MCR (↓).
 <img src="./figs/csr_mcr.png" alt="drawing" width="1000">
 
@@ -149,4 +150,5 @@ We refer to the README.md files under each dataset folder to prepare the dataset
 
 
 ## Acknowledgement
+--- --- ---
 We are very grateful that the authors of Tree-sitter, CodeBERT, GraphCodeBERT, and CodeT5 make their code publicly available so that we can build this repository on top of their code. 
