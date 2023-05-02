@@ -10,8 +10,8 @@
   - [Demo](#demo)
   - [Running Experiments](#running-experiments)
   - [Experimental Results](#experimental-results)
-- [Acknowledgement](#acknowledgement)
-- 
+- [Acknowledgement](#acknowledgement) 
+
 ## Overview
 --- ---
 <img src="./figs/overview.png" alt="drawing" width="1000">
