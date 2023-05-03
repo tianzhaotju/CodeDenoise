@@ -213,7 +213,7 @@ def main():
     args.block_size = 512 
     args.seed = 123456
     args.evaluate_during_training = True
-    args.train_batch_size = 1
+    args.train_batch_size = 16
     args.eval_batch_size = 1
     args.max_grad_norm = 1.0
     args.warmup_steps = 0
@@ -226,23 +226,23 @@ def main():
         args.config_name = 'microsoft/codebert-base'
         args.model_name_or_path = 'microsoft/codebert-base'
         args.tokenizer_name = 'roberta-base'
-        args.epochs = 1
+        args.epochs = 5
         args.learning_rate = 5e-5
     elif args.model_name == 'graphcodebert':
         args.model_type = 'graphcodebert_roberta'
         args.config_name = 'microsoft/graphcodebert-base'
         args.model_name_or_path = 'microsoft/graphcodebert-base'
         args.tokenizer_name = 'microsoft/graphcodebert-base'
-        args.epochs = 1
+        args.epochs = 5
         args.code_length = 448
         args.data_flow_length = 64
-        args.learning_rate = 5e-5
+        args.learning_rate = 2e-5
     elif args.model_name == 'codet5':
         args.model_type = 'codet5'
         args.config_name = 'Salesforce/codet5-base-multi-sum'
         args.model_name_or_path = 'Salesforce/codet5-base-multi-sum'
         args.tokenizer_name = 'Salesforce/codet5-base-multi-sum'
-        args.epochs = 1
+        args.epochs = 5
         args.learning_rate = 2e-5
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
