@@ -1,6 +1,6 @@
 # CodeDenoise
 
-In this work, we propose the first input denoising technique (CodeDenoise) for on-the-fly improve performance of deep code models. It consists of randomized-smoothing-based mispredicted input identification, attentionbased noise localization, and MCIP-based noise cleansing. Our extensive study on 18 deep code models demonstrates the effectiveness and efficiency of CodeDenoise, significantly outperforming the widely-used fine-tuning technique.
+In this work, we propose the first input denoising technique (CodeDenoise) for on-the-fly improve performance of deep code models. It consists of randomized-smoothing-based mispredicted input identification, attention-based noise localization, and MCIP-based noise cleansing. Our extensive study on 18 deep code models demonstrates the effectiveness and efficiency of CodeDenoise, significantly outperforming the widely-used fine-tuning technique.
 
 See [Zhao Tian](https://tianzhaotju.github.io/), [Junjie Chen](https://sites.google.com/site/junjiechen08/), et al. "[On-the-fly Improving Performance of Deep Code Models via Input Denoising](https://arxiv.org/abs/2308.09969)." The 38th IEEE/ACM International Conference on Automated Software Engineering (ASE'23).
 
