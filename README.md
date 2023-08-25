@@ -1,4 +1,10 @@
 # CodeDenoise
+
+In this work, we propose the first input denoising technique (CodeDenoise) for on-the-fly improve performance of deep code models. It consists of randomized-smoothing-based mispredicted input identification, attentionbased noise localization, and MCIP-based noise cleansing. Our extensive study on 18 deep code models demonstrates the effectiveness and efficiency of CodeDenoise, significantly outperforming the widely-used fine-tuning technique.
+
+See [Zhao Tian](https://tianzhaotju.github.io/), [Junjie Chen](https://sites.google.com/site/junjiechen08/), et al. "[On-the-fly Improving Performance of Deep Code Models via Input Denoising](https://arxiv.org/abs/2308.09969)." The 38th IEEE/ACM International Conference on Automated Software Engineering (ASE'23).
+
+
 --- ---
 - [Overview](#overview)
   - [Folder Structure](#folder-structure)
@@ -9,8 +15,7 @@
 - [Experiments](#experiments)
   - [Demo](#demo)
   - [Running Experiments](#running-experiments)
-  - [Experimental Results](#experimental-results)
-- [Acknowledgement](#acknowledgement) 
+- [Acknowledgements](#acknowledgements) 
 
 ## Overview
 --- ---
@@ -108,47 +113,9 @@ CUDA_VISIBLE_DEVICES=0 python denoise.py --model_name=codebert --theta=1 --N=1;
 ```
 
 
-### Running Experiments
---- --- ---
-We refer to the README.md files under each dataset folder to prepare the dataset and denoise inputs on different tasks. 
 
-
-### Experimental Results
---- --- ---
-####  (1) Effectiveness comparison in terms of CSR (↑)/MCR (↓).
-<img src="./figs/csr_mcr.png" alt="drawing" width="1000">
-
---- --- ---
-
-
-
-####  (2) Effectiveness comparison in terms of the overall accuracy (↑) of model.
-<img src="./figs/accuracy.png" alt="drawing" width="1000">
-
---- --- ---
-
-
-####  (3) Ablation test for CodeNoise in terms of CSR (↑)/MCR (↓)/the average number of identifier changes (↓).
-<img src="./figs/ablation.png" alt="drawing" width="1000">
-
---- --- ---
-
-
-
-####  (4) Influence of hyper-parameter θ in terms of CSR (↑)/MCR (↓)/the average time spend on denoising an input (↓).
-<img src="./figs/theta.png" alt="drawing" width="800">
-
---- --- ---
-
-
-
-####  (5) Influence of hyper-parameter N in terms of CSR (↑)/MCR (↓)/the average time spend on denoising an input (↓).
-<img src="./figs/n.png" alt="drawing" width="800">
-
---- --- ---
-
-
-
-## Acknowledgement
+## Acknowledgements
 --- --- ---
 We are very grateful that the authors of Tree-sitter, CodeBERT, GraphCodeBERT, and CodeT5 make their code publicly available so that we can build this repository on top of their code. 
+
+This work was supported by the National Natural Science Foundation of China Grant Nos. 62322208, 62002256, and CCF Young Elite Scientists Sponsorship Program (by CAST), and NSF Nos. 1901242, 1910300.
