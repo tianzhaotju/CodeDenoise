@@ -70,12 +70,12 @@ The folder structure is as follows.
 Our experiments were conducted under Ubuntu 20.04. 
 We have made a ready-to-use docker image for this experiment.
 ```shell
-docker pull anonymous4open/code_denoise:latest
+docker pull (to be updated)/code_denoise:latest
 ```
 Then, assuming you have NVIDIA GPUs, you can create a container using this docker image. 
 An example:
 ```shell
-docker run --name=code_denoise --gpus all -it --mount type=bind,src=./code_denoise,dst=/workspace anonymous4open/code_denoise:latest
+docker run --name=code_denoise --gpus all -it --mount type=bind,src=./code_denoise,dst=/workspace (to be updated)/code_denoise:latest
 ```
 
 ### Build tree-sitter
