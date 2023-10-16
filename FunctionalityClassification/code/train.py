@@ -277,7 +277,7 @@ def main():
         print('training...')
         train(args, train_dataset, model, tokenizer)
     else:
-        result = evaluate(args, model, model, tokenizer)
+        result = evaluate(args, model, tokenizer)
         for key in sorted(result.keys()):
             print("  %s = %s", key, str(round(result[key], 4)))
 
