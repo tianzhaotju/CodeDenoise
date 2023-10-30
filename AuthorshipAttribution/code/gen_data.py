@@ -1,7 +1,7 @@
 from __future__ import absolute_import, division, print_function
 import sys
-sys.path.append('../../../')
-sys.path.append('../../../python_parser')
+sys.path.append('../../')
+sys.path.append('../../python_parser')
 import warnings
 warnings.filterwarnings("ignore")
 import os
