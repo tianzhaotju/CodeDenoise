@@ -134,7 +134,7 @@ def is_incorrect(args, original_model, original_tokenizer, all_vars, identifiers
         else:
             temp_y_preds[la] = 1
     rs_pred_labels = sorted(temp_y_preds.items(), key=lambda x: x[1], reverse=True)
-    if pred_labels != rs_pred_labels[0] and len(rs_pred_labels) > 1:
+    if len(rs_pred_labels) > 1 and pred_labels != rs_pred_labels[0]:
         return 1
     return 0
 
