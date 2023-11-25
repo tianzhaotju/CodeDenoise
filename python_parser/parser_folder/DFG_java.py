@@ -1,10 +1,7 @@
 # Copyright (c) Microsoft Corporation. 
 # Licensed under the MIT license.
 
-from .utils import (remove_comments_and_docstrings,
-                    tree_to_token_index,
-                    index_to_code_token,
-                    tree_to_variable_index)
+from .utils import tree_to_variable_index
 
 
 def DFG_java(root_node, index_to_code, states):

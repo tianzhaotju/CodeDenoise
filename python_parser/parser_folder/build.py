@@ -13,7 +13,6 @@ Language.build_library(
     'tree-sitter-java',
     'tree-sitter-cpp',
     'tree-sitter-c',
-
   ]
 )
 

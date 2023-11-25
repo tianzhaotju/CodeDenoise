@@ -1,7 +1,7 @@
-import collections
 import re
-from io import StringIO
 import tokenize
+import collections
+from io import StringIO
 
 
 def isSameTree(root_p, root_q) -> bool:
