@@ -1,18 +1,17 @@
-import argparse
-import random
 import sys
-from keyword import iskeyword
-from parser_folder.DFG_python import DFG_python
-from parser_folder.DFG_c import DFG_c
-from parser_folder.DFG_java import DFG_java
-from parser_folder import (remove_comments_and_docstrings, tree_to_token_index, index_to_code_token)
-from tree_sitter import Language, Parser
-import javalang
-
-sys.path.append('..')
-sys.path.append('../../../')
 sys.path.append('.')
+sys.path.append('..')
 sys.path.append('../')
+sys.path.append('../../../')
+import random
+import javalang
+from keyword import iskeyword
+from parser_folder.DFG_c import DFG_c
+from tree_sitter import Language, Parser
+from parser_folder.DFG_java import DFG_java
+from parser_folder.DFG_python import DFG_python
+from parser_folder import (remove_comments_and_docstrings, tree_to_token_index, index_to_code_token)
+
 
 python_keywords = ['import', '', '[', ']', ':', ',', '.', '(', ')', '{', '}', 'not', 'is', '=', "+=", '-=', "<", ">",
                    '+', '-', '*', '/', 'False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await', 'break',
@@ -93,6 +92,22 @@ special_char = ['[', ']', ':', ',', '.', '(', ')', '{', '}', 'not', 'is', '=', "
                 '|']
 
 
+path = '../../python_parser/parser_folder/my-languages.so'
+dfg_function = {
+    'python': DFG_python,
+    'java': DFG_java,
+    'c': DFG_c,
+}
+
+parsers = {}
+for lang in dfg_function:
+    LANGUAGE = Language(path, lang)
+    parser = Parser()
+    parser.set_language(LANGUAGE)
+    parser = [parser, dfg_function[lang]]
+    parsers[lang] = parser
+
+
 def is_valid_variable_python(name: str) -> bool:
     if not name.isidentifier():
         return False
@@ -134,22 +149,6 @@ def is_valid_variable_name(name: str, lang: str) -> bool:
         return is_valid_variable_java(name)
     else:
         return False
-
-
-path = '../../python_parser/parser_folder/my-languages.so'
-dfg_function = {
-    'python': DFG_python,
-    'java': DFG_java,
-    'c': DFG_c,
-}
-
-parsers = {}
-for lang in dfg_function:
-    LANGUAGE = Language(path, lang)
-    parser = Parser()
-    parser.set_language(LANGUAGE)
-    parser = [parser, dfg_function[lang]]
-    parsers[lang] = parser
 
 
 def get_code_tokens(code, lang):
