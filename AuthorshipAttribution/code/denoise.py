@@ -1,12 +1,11 @@
 from __future__ import absolute_import, division, print_function
-import os
 import sys
 sys.path.append('../../')
 sys.path.append('../../python_parser')
 import warnings
 warnings.filterwarnings("ignore")
+import os
 import torch
-import random
 import argparse
 import numpy as np
 from tqdm import tqdm
@@ -16,18 +15,14 @@ from tree_sitter import Language, Parser
 from model import CodeBERT, GraphCodeBERT, CodeT5
 from parser_folder import DFG_python, DFG_java, DFG_c
 from run_parser import get_identifiers_ori, get_example
-from utils import CodeDataset, GraphCodeDataset, CodeT5Dataset, is_valid_variable_name, output_weights
+from utils import CodeDataset, GraphCodeDataset, CodeT5Dataset, is_valid_variable_name, output_weights, set_seed
 from transformers import (RobertaModel, RobertaConfig, RobertaForSequenceClassification, RobertaTokenizer, T5Config,
                           T5ForConditionalGeneration, RobertaForMaskedLM, pipeline)
 from run import CodeBertInputFeatures, GraphCodeBertInputFeatures, CodeT5InputFeatures, extract_dataflow, \
     codebert_convert_examples_to_features, graphcodebert_convert_examples_to_features, codet5_convert_examples_to_features
 
 
-dfg_function = {
-    'python': DFG_python,
-    'java': DFG_java,
-    'c': DFG_c
-}
+dfg_function = {'python': DFG_python, 'java': DFG_java, 'c': DFG_c}
 parsers = {}
 for lang in dfg_function:
     LANGUAGE = Language('../../python_parser/parser_folder/my-languages.so', lang)
@@ -35,21 +30,11 @@ for lang in dfg_function:
     parser.set_language(LANGUAGE)
     parser = [parser, dfg_function[lang]]
     parsers[lang] = parser
-
-
 MODEL_CLASSES = {
     'codebert_roberta': (RobertaConfig, RobertaModel, RobertaTokenizer),
     'graphcodebert_roberta': (RobertaConfig, RobertaForSequenceClassification, RobertaTokenizer),
     'codet5': (T5Config, T5ForConditionalGeneration, RobertaTokenizer),
 }
-
-
-def set_seed(args):
-    random.seed(args.seed)
-    np.random.seed(args.seed)
-    torch.manual_seed(args.seed)
-    if args.n_gpu > 0:
-        torch.cuda.manual_seed_all(args.seed)
 
 
 def codebert_convert_code_to_features(code, tokenizer, label, args):
@@ -148,8 +133,8 @@ def is_incorrect(args, original_model, original_tokenizer, all_vars, identifiers
             temp_y_preds[la] += 1
         else:
             temp_y_preds[la] = 1
-    temp_y_preds1 = sorted(temp_y_preds.items(), key=lambda x: x[1], reverse=True)
-    if pred_labels != ori_labels and len(temp_y_preds1) > 1:
+    rs_pred_labels = sorted(temp_y_preds.items(), key=lambda x: x[1], reverse=True)
+    if pred_labels != rs_pred_labels[0] and len(rs_pred_labels) > 1:
         return 1
     return 0
 
@@ -255,9 +240,6 @@ def evaluate(args, mlm_model, mlm_tokenizer, original_model, original_tokenizer,
             if len(new_dataset) == 0:
                 continue
             all_logits, preds, _ = original_model.get_results(new_dataset, args.eval_batch_size, False)
-            if ori_labels in preds:
-                y_preds.append(ori_labels)
-                break
             index = -1
             for i in range(len(preds)):
                 if preds[i] != pred_labels:

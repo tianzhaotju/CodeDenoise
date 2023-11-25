@@ -7,10 +7,10 @@ warnings.filterwarnings("ignore")
 import os
 import re
 import torch
-import random
 import argparse
 import numpy as np
 from tqdm import tqdm
+from utils import set_seed
 from torch.utils.data import DataLoader
 from model import CodeBERT, GraphCodeBERT, CodeT5
 from run import CodeBertTextDataset, GraphCodeBertTextDataset, CodeT5TextDataset
@@ -24,14 +24,6 @@ MODEL_CLASSES = {
     'graphcodebert_roberta': (RobertaConfig, RobertaForSequenceClassification, RobertaTokenizer),
     'codet5': (T5Config, T5ForConditionalGeneration, RobertaTokenizer),
 }
-
-
-def set_seed(args):
-    random.seed(args.seed)
-    np.random.seed(args.seed)
-    torch.manual_seed(args.seed)
-    if args.n_gpu > 0:
-        torch.cuda.manual_seed_all(args.seed)
 
 
 def generate(args, model, tokenizer, mlm_tokenizer, data_file, method):

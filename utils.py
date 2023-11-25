@@ -1,16 +1,16 @@
-import torch
-import torch.nn as nn
-import random
-from tqdm import tqdm
-from torch.utils.data.dataset import Dataset
-import os
 import re
-import numpy as np
 import csv
-from python_parser.run_parser import get_example_batch, get_identifiers
-from keyword import iskeyword
+import torch
+import random
 import pycparser
+import numpy as np
+import torch.nn as nn
+from tqdm import tqdm
+from keyword import iskeyword
 from sklearn.metrics import roc_curve, auc
+from torch.utils.data.dataset import Dataset
+from python_parser.run_parser import get_example_batch, get_identifiers
+
 
 python_keywords = ['import', '', '[', ']', ':', ',', '.', '(', ')', '{', '}', 'not', 'is', '=', "+=", '-=', "<", ">",
                    '+', '-', '*', '/', 'False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await', 'break',
@@ -468,13 +468,12 @@ class CodePairDataset(Dataset):
                 torch.tensor(self.examples[item].label))
 
 
-def set_seed(seed=42):
-    random.seed(seed)
-    os.environ['PYHTONHASHSEED'] = str(seed)
-    np.random.seed(seed)
-    torch.manual_seed(seed)
-    torch.cuda.manual_seed(seed)
-    torch.backends.cudnn.deterministic = True
+def set_seed(args):
+    random.seed(args.seed)
+    np.random.seed(args.seed)
+    torch.manual_seed(args.seed)
+    if args.n_gpu > 0:
+        torch.cuda.manual_seed_all(args.seed)
 
 
 class Recorder:

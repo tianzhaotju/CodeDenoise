@@ -2,19 +2,19 @@ from __future__ import absolute_import, division, print_function
 import sys
 sys.path.append('../../')
 sys.path.append('../../python_parser')
-import argparse
 import os
-import random
-import numpy as np
 import torch
+import argparse
+import numpy as np
+from tqdm import tqdm
+from utils import set_seed
 from torch.utils.data import DataLoader
+from model import CodeBERT, GraphCodeBERT, CodeT5
+from sklearn.metrics import recall_score, precision_score, f1_score
+from run import CodeBertTextDataset, GraphCodeBertTextDataset, CodeT5TextDataset
 from transformers import (AdamW, get_linear_schedule_with_warmup, RobertaModel,
                           RobertaConfig, RobertaForSequenceClassification, RobertaTokenizer,
                           T5Config, T5ForConditionalGeneration)
-from tqdm import tqdm
-from model import CodeBERT, GraphCodeBERT, CodeT5
-from run import CodeBertTextDataset, GraphCodeBertTextDataset, CodeT5TextDataset
-from sklearn.metrics import recall_score, precision_score, f1_score
 
 
 MODEL_CLASSES = {
@@ -22,14 +22,6 @@ MODEL_CLASSES = {
     'graphcodebert_roberta': (RobertaConfig, RobertaForSequenceClassification, RobertaTokenizer),
     'codet5': (T5Config, T5ForConditionalGeneration, RobertaTokenizer),
 }
-
-
-def set_seed(args):
-    random.seed(args.seed)
-    np.random.seed(args.seed)
-    torch.manual_seed(args.seed)
-    if args.n_gpu > 0:
-        torch.cuda.manual_seed_all(args.seed)
 
 
 def train(args, train_dataset, model, tokenizer):
